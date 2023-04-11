@@ -9,7 +9,7 @@ export default function UpdateUser() {
                 <div class="container mx-auto my-4 px-4 lg:px-20">
                     <div class="w-full bg-white p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl">
                         <div class="flex">
-                            <h1 class="font-bold uppercase text-5xl">Create User</h1>
+                            <h1 class="font-bold uppercase text-5xl">Update User</h1>
                         </div>
                         <div class="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
                             <input class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"

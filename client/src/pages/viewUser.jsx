@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import axios from 'axios'
-import UpdateUser from './updateUser';
 
 export default function ViewUser() {
     const headers = ['First Name', 'Last Name', 'Email', 'Phone', 'Password', 'Update', 'Delete']
@@ -11,8 +10,9 @@ export default function ViewUser() {
         await axios.get("http://localhost:3001/viewuser").then((response) => setUsers(response.data))
     }
 
-    function handleDeleteUser(id) {
-        axios.delete(`http://localhost:3001/delete/${id}`);
+    async function handleDeleteUser(id) {
+        await axios.delete(`http://localhost:3001/delete/${id}`);
+        await getData();
     }
 
     useEffect(() => {
@@ -58,16 +58,16 @@ export default function ViewUser() {
                                     </td>
 
                                     <td className="px-6 py-4 bg-gray-800">
-                                        <button 
-                                            onClick={<UpdateUser props={user} />} 
+                                        <button
+                                            onClick={() => { window.location.href = "/update/" + user.id }}
                                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                             Update
                                         </button>
                                     </td>
 
                                     <td className="px-6 py-4 bg-gray-800">
-                                        <button 
-                                            onClick={handleDeleteUser(user.id)}
+                                        <button
+                                            onClick={() => handleDeleteUser(user.id)}
                                             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                             Delete
                                         </button>

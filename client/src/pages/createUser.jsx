@@ -12,6 +12,10 @@ export default function CreateUser() {
         }));
     }
 
+    function comeback() {
+        window.location.assign ('/viewuser');
+    }
+
     function handleClickButton() {
         axios.post("http://localhost:3001/create", {
             first_name: values.firstname,
@@ -22,6 +26,7 @@ export default function CreateUser() {
         }).then((response) =>{
             console.log(response)
         })
+        comeback()
     }
 
     return (

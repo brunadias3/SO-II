@@ -16,48 +16,56 @@ const db = mysql.createConnection({
 app.use(cors());
 app.use(express.json());
 
-app.post('/create', (req,res) => {
+app.post('/create', (req, res) => {
     const { first_name, last_name, email, phone, password } = req.body
     let query = 'INSERT INTO usuarios ( first_name, last_name, email, phone, password ) VALUES ( ?, ?, ?, ?, ? )';
-    db.query(query,[first_name,last_name,email,phone,password],(err, result) => {
+    db.query(query, [first_name, last_name, email, phone, password], (err, result) => {
         console.log(err)
     })
 })
 
-app.get('/viewuser', (req,res) => {
+app.get('/viewuser', (req, res) => {
     let query = 'SELECT * FROM usuarios'
-    db.query(query,(err,result) => {
+    db.query(query, (err, result) => {
         err ? console.log(err) : res.send(result)
     })
 })
 
-app.put('/update', (req,res) => {
-    const {id, first_name, last_name, email, phone, password } = req.body;
+app.get('/user/:id', (req, res) => {
+    const { id } = req.params;
+    let query = 'SELECT * FROM usuarios WHERE id = ?';
+    db.query(query, [id], (err, result) => {
+        err ? console.log(err) : res.send(result)
+    })
+})
+
+app.put('/update', (req, res) => {
+    const { id, first_name, last_name, email, phone, password } = req.body;
     let query = 'UPDATE usuarios SET first_name = ?, last_name = ?, email = ?, phone = ?, password = ? where id = ?';
 
-    db.query(query, [first_name,last_name,email,phone,password,id], (err, result) => {
-        err? console.log(err) : res.send(result);
+    db.query(query, [first_name, last_name, email, phone, password, id], (err, result) => {
+        err ? console.log(err) : res.send(result);
     })
 })
 
 app.delete('/delete/:id', (req, res) => {
-    const {id} = req.params;
+    const { id } = req.params;
     let query = 'DELETE FROM usuarios WHERE id = ?';
 
-    db.query(query, [id], (err,result) =>{
+    db.query(query, [id], (err, result) => {
         err ? console.log(err) : res.send(result)
     })
 })
 
 db.connect(error => {
-    if (error){
+    if (error) {
         console.log("A error has been occured "
-            + "while connecting to database.");        
+            + "while connecting to database.");
         throw error;
     }
 
-//If Everything goes correct, Then start Express Server
-app.listen(PORT, () => {
-    console.log("Server is Listening on Port ", PORT);
-})
+    //If Everything goes correct, Then start Express Server
+    app.listen(PORT, () => {
+        console.log("Server is Listening on Port ", PORT);
+    })
 })

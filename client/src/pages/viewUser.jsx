@@ -21,8 +21,10 @@ export default function ViewUser() {
 
     return (
         <>
-            <Navbar />
-            <div className='w-full bg-gray-700 mt-40 flex justify-center'>
+            <div className='mb-20'>
+                <Navbar />
+            </div>
+            <div className='w-full bg-gray-700 flex justify-center'>
                 <div className="overflow-x-auto rounded-lg">
                     <table className="text-sm text-center text-gray-400 shadow-md">
                         <thead className="text-xs uppercase text-gray-400">
